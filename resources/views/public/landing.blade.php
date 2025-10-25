@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-6 md:px-12 text-center md:text-left">
         <h1 class="text-4xl md:text-6xl font-bold text-emerald-700 mb-4" data-aos="fade-right">SDIT Citra Islamic School</h1>
         <p class="text-gray-700 md:text-lg mb-6" data-aos="fade-right" data-aos-delay="100">
-            Pendidikan Islami berkualitas, karakter & prestasi — siapkan generasi masa depan.
+            YAYASAN DARUL ABROR KEMIRI
         </p>
         <a href="{{ route('pendaftaran') }}" class="inline-block px-6 py-3 bg-gradient-to-r from-green-500 to-blue-400 text-white font-semibold rounded-lg shadow hover:opacity-90 transition" data-aos="fade-up" data-aos-delay="200">
             Daftar Sekarang
@@ -23,20 +23,13 @@
 <!-- VISI MISI -->
 <section id="visi" class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-6 md:px-12 text-center" data-aos="fade-up">
-        <h2 class="text-3xl md:text-4xl font-bold text-emerald-700 mb-8">Visi & Misi</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-emerald-700 mb-8">Visi</h2>
         <div class="grid md:grid-cols-2 gap-8">
             <div class="bg-green-50 rounded-lg shadow-soft p-6" data-aos="fade-right">
                 <h3 class="font-semibold text-xl text-emerald-700 mb-2">Visi</h3>
-                <p>Mencetak generasi berakhlak mulia, cerdas, dan kreatif dalam ilmu pengetahuan dan teknologi.</p>
+                <p>"Membentuk Karakteristik Siswa/i yang: Berahklaqul Karimah Beriman dan Bertaqwa,Mandiri,MOderat,Berilmu,Cerdas,Handal,Terampil,Kreatif dan Inovatif."</p>
             </div>
-            <div class="bg-blue-50 rounded-lg shadow-soft p-6" data-aos="fade-left">
-                <h3 class="font-semibold text-xl text-emerald-700 mb-2">Misi</h3>
-                <ul class="list-disc list-inside text-gray-700">
-                    <li>Menyelenggarakan pendidikan Islami berkualitas.</li>
-                    <li>Mengembangkan karakter dan kreativitas siswa.</li>
-                    <li>Meningkatkan prestasi akademik dan non-akademik.</li>
-                </ul>
-            </div>
+           
         </div>
     </div>
 </section>
@@ -45,7 +38,7 @@
 <section id="guru" class="py-16 bg-gradient-to-r from-green-50 via-blue-50 to-white">
     <div class="max-w-7xl mx-auto px-6 md:px-12 text-center mb-10" data-aos="fade-up">
         <h2 class="text-3xl md:text-4xl font-bold text-emerald-700 mb-2">Guru Kami</h2>
-        <p class="text-gray-700 md:text-lg">Pengajar profesional & berpengalaman di bidangnya</p>
+        <p class="text-gray-700 md:text-lg">Pengajar</p>
     </div>
     <div class="max-w-7xl mx-auto px-6 md:px-12 grid md:grid-cols-4 gap-6">
         @foreach($gurus as $guru)
@@ -148,8 +141,9 @@
         <h2 class="text-3xl md:text-4xl font-bold text-emerald-700">Kontak Kami</h2>
     </div>
     <div class="max-w-3xl mx-auto px-6 md:px-12 text-center">
-        <p class="text-gray-700 mb-4">Jl. Pendidikan No.123, Kota Citra</p>
-        <p class="text-gray-700 mb-4">Telp: 0812-3456-7890 • Email: info@sditcitra.sch.id</p>
+        <p class="text-gray-700 mb-4">KOMPLEK BPPM DARUL ABROR</p>
+        <p class="text-gray-700 mb-4">JL.Raya Kemiri KM.03 No.29 Ds.Kemiri Kec.Kemiri Kab.Tangerang Prov.Banten 15530</p>
+        <p class="text-gray-700 mb-4">Telp: 085773001006-085773811819• Email: sditcitraislamicschool@gmail.com</p>
         <a href="mailto:info@sditcitra.sch.id" class="px-6 py-2 bg-gradient-to-r from-green-500 to-blue-400 text-white rounded-lg shadow hover:opacity-90 transition">Kirim Email</a>
     </div>
 </section>
