@@ -10,11 +10,10 @@ class RoleMiddleware
 {
     /**
      * Handle an incoming request.
-     * Usage: ->middleware('role:admin') atau ->middleware('role:admin|guru|siswa|ortu')
+     * Usage: ->middleware('role:admin') atau ->middleware('role:admin|guru|ortu')
      */
     public function handle(Request $request, Closure $next, string $roles)
     {
-        // 🔐 Cek login
         if (!Auth::check()) {
             return redirect()->route('login')->withErrors([
                 'email' => 'Silakan login terlebih dahulu.',
@@ -22,26 +21,23 @@ class RoleMiddleware
         }
 
         $user = Auth::user();
-        $userRole = $user->role;
 
-        // ✅ Pastikan role ada
-        if (!$userRole) {
+        if (!$user->role) {
             return redirect()->route('login')->withErrors([
                 'email' => 'Akun ini tidak memiliki role yang valid.',
             ]);
         }
 
+        $userRole = $user->role->name; // ✅ ambil nama role, bukan objek
+
         $allowedRoles = explode('|', $roles);
 
-        // ✅ Kalau role tidak cocok, redirect ke dashboard masing-masing
         if (!in_array($userRole, $allowedRoles)) {
             switch ($userRole) {
                 case 'admin':
                     return redirect()->route('admin.dashboard');
                 case 'guru':
                     return redirect()->route('guru.dashboard');
-                case 'siswa':
-                    return redirect()->route('siswa.dashboard');
                 case 'ortu':
                     return redirect()->route('ortu.dashboard');
                 default:

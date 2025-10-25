@@ -1,6 +1,9 @@
-@extends('layouts.admin')
-@section('title','Landing Page Settings')
-@section('content')
+<x-layouts.admin title="index.blade">
+<x-layouts.admin title="index.blade">
+
+
+
+
 <div class="max-w-4xl mx-auto">
   <h1 class="text-xl font-bold mb-4">Landing Page Settings</h1>
   @if(session('success')) <div class="p-3 bg-green-100 text-green-700 rounded mb-4">{{ session('success') }}</div> @endif
@@ -69,4 +72,13 @@
     </div>
   </form>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

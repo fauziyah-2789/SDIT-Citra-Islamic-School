@@ -1,6 +1,10 @@
-@extends('layouts.admin')
+<x-layouts.admin title="create.blade">
+<x-layouts.admin title="create.blade">
 
-@section('content')
+
+
+
+
 <div class="container">
     <h1>Tambah Pengumuman</h1>
     <form action="{{ route('pengumuman.store') }}" method="POST">
@@ -20,4 +24,13 @@
         <button class="btn btn-success">Simpan</button>
     </form>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

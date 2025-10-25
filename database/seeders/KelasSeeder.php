@@ -10,12 +10,12 @@ class KelasSeeder extends Seeder
     public function run(): void
     {
         $kelasList = [
-            ['nama_kelas' => '1'],
-            ['nama_kelas' => '2'],
-            ['nama_kelas' => '3'],
-            ['nama_kelas' => '4'],
-            ['nama_kelas' => '5'],
-            ['nama_kelas' => '6'],
+            ['nama' => '1'],
+            ['nama' => '2'],
+            ['nama' => '3'],
+            ['nama' => '4'],
+            ['nama' => '5'],
+            ['nama' => '6'],
         ];
 
         foreach ($kelasList as $kelas) {

@@ -1,9 +1,4 @@
-@extends('layouts.guest')
-
-@section('title', $guru->nama . ' - Sekolah Citra')
-
-@section('content')
-<section class="max-w-4xl mx-auto px-6 py-10 bg-white rounded-xl shadow">
+<x-layouts.guest><section class="max-w-4xl mx-auto px-6 py-10 bg-white rounded-xl shadow">
     <div class="text-center mb-8">
         @if($guru->foto)
             <img src="{{ asset('storage/'.$guru->foto) }}" class="mx-auto rounded-xl mb-4 h-56 w-56 object-cover">
@@ -25,5 +20,7 @@
             ← Kembali ke Daftar Guru
         </a>
     </div>
-</section>
-@endsection
+</section></x-layouts.guest>
+
+
+

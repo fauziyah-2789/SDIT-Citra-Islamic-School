@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -10,15 +9,18 @@ return new class extends Migration {
         Schema::create('gurus', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('nip')->nullable();
             $table->string('nama');
             $table->string('mapel')->nullable();
             $table->string('profesi')->nullable();
             $table->string('foto')->nullable();
+            $table->string('no_hp')->nullable(); // Tambahan
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
+
     public function down(): void {
         Schema::dropIfExists('gurus');
     }

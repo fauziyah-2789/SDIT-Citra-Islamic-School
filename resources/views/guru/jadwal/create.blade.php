@@ -1,6 +1,9 @@
-@extends('layouts.guru')
-@section('title', 'Tambah Jadwal - Guru')
-@section('content')
+<x-layouts.guru title="create.blade">
+<x-layouts.guru title="create.blade">
+
+
+
+
 <h1 class="text-2xl font-bold mb-4">Tambah Jadwal</h1>
 
 <form action="{{ route('guru.jadwal.store') }}" method="POST">
@@ -35,4 +38,13 @@
     </div>
     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
 </form>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.guru>
+</x-layouts.guru>

@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="edit.blade">
+<x-layouts.admin title="edit.blade">
 
-@section('title', 'Edit Soal')
 
-@section('content')
+
+
+
+
 <h1 class="text-2xl font-bold mb-4">Edit Soal</h1>
 
 <form action="{{ route('admin.soal.update', $soal->id) }}" method="POST" class="space-y-4">
@@ -29,4 +32,13 @@
     </div>
     <button type="submit" class="bg-[#6A5ACD] text-white px-4 py-2 rounded hover:bg-[#7B68EE]">Update</button>
 </form>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

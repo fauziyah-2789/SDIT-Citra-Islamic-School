@@ -86,18 +86,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// ==========================
-// DASHBOARD REDIRECTOR
-// ==========================
+// Dashboard redirect
 Route::get('/dashboard', function () {
     $user = Auth::user();
-    return match ($user->role->nama ?? '') {
+
+    return match ($user->role->name ?? '') {
         'admin' => redirect()->route('admin.dashboard'),
         'guru'  => redirect()->route('guru.dashboard'),
         'ortu'  => redirect()->route('ortu.dashboard'),
         default => redirect()->route('landing'),
     };
 })->middleware('auth')->name('dashboard');
+
 
 // ==========================
 // ADMIN AREA
@@ -106,16 +106,17 @@ Route::middleware(['auth', 'role:admin'])
     ->prefix('admin')
     ->as('admin.')
     ->group(function () {
+        // Dashboard
         Route::get('/', [AdminDashboard::class, 'index'])->name('index');
         Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
 
-        // ✅ Profil admin & profil sekolah
+        // Profil admin & profil sekolah
         Route::get('/profil', [ProfilController::class, 'show'])->name('profil.show');
         Route::get('/profil/edit', [ProfilController::class, 'edit'])->name('profil.edit');
         Route::post('/profil/update', [ProfilController::class, 'update'])->name('profil.update');
         Route::resource('profilsekolah', ProfilSekolahController::class);
 
-        // ✅ Semua CRUD utama
+        // Semua CRUD utama
         Route::resources([
             'berita'           => BeritaController::class,
             'galeri'           => GaleriController::class,
@@ -145,14 +146,23 @@ Route::middleware(['auth', 'role:admin'])
         ]);
     });
 
-// ==========================
+
 // GURU AREA
-// ==========================
 Route::middleware(['auth', 'role:guru'])
     ->prefix('guru')
     ->as('guru.')
     ->group(function () {
+        // Dashboard
         Route::get('/dashboard', [GuruDashboard::class, 'index'])->name('dashboard');
+
+        // Notifikasi
+        Route::get('notifikasi', [App\Http\Controllers\Guru\NotifikasiController::class, 'index'])->name('notifikasi');
+
+        // Profil Guru (singleton)
+        Route::get('profil', [App\Http\Controllers\Guru\ProfilController::class, 'edit'])->name('profil.edit');
+        Route::put('profil', [App\Http\Controllers\Guru\ProfilController::class, 'update'])->name('profil.update');
+
+        // Resource lain
         Route::resources([
             'materi'      => App\Http\Controllers\Guru\MateriController::class,
             'soal'        => App\Http\Controllers\Guru\SoalController::class,
@@ -161,34 +171,33 @@ Route::middleware(['auth', 'role:guru'])
             'pengumuman'  => App\Http\Controllers\Guru\PengumumanController::class,
             'absensi'     => App\Http\Controllers\Guru\AbsensiController::class,
             'jadwal'      => App\Http\Controllers\Guru\JadwalController::class,
-            'profil'      => App\Http\Controllers\Guru\ProfilController::class,
         ]);
     });
 
-// ==========================
+
 // ORANG TUA AREA
-// ==========================
+
 Route::middleware(['auth', 'role:ortu'])
     ->prefix('ortu')
     ->as('ortu.')
     ->group(function () {
         Route::get('/dashboard', [OrtuDashboard::class, 'index'])->name('dashboard');
+        Route::prefix('ortu')->name('ortu.')->middleware(['auth','role:ortu'])->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\Ortu\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profil/edit', [App\Http\Controllers\Ortu\ProfilController::class, 'edit'])->name('profil.edit');
+    Route::post('/profil/update', [App\Http\Controllers\Ortu\ProfilController::class, 'update'])->name('profil.update');
+});
+
         Route::get('/nilai-anak', [App\Http\Controllers\Ortu\NilaiController::class, 'index'])->name('nilai.index');
         Route::get('/jadwal-anak', [App\Http\Controllers\Ortu\JadwalController::class, 'index'])->name('jadwal.index');
         Route::get('/absensi-anak', [App\Http\Controllers\Ortu\AbsensiController::class, 'index'])->name('absensi.index');
     });
 
-// ==========================
+
 // PUBLIC AREA
-// ==========================
 
-// Landing utama
 Route::get('/', [PublicController::class, 'index'])->name('landing');
-
-// Profil Sekolah Publik
 Route::get('/profil', [ProfilPublikController::class, 'index'])->name('profil.publik.index');
-
-// Ekstrakurikuler Publik
 Route::get('/ekstrakurikuler', [EkstrakurikulerPublikController::class, 'index'])->name('ekstra.publik.index');
 
 // Berita Publik
@@ -203,11 +212,9 @@ Route::prefix('galeri')->as('galeri.publik.')->group(function () {
     Route::get('/{slug}', [GaleriPublikController::class, 'show'])->name('show');
 });
 
-
-// Guru publik
+// Guru Publik
 Route::get('/guru', [GuruPublikController::class, 'index'])->name('guru.publik.index');
 Route::get('/guru/{id}', [GuruPublikController::class, 'show'])->name('guru.publik.show');
-
 
 // Prestasi Publik
 Route::prefix('prestasi')->as('prestasi.publik.')->group(function () {
@@ -218,13 +225,17 @@ Route::prefix('prestasi')->as('prestasi.publik.')->group(function () {
 // Pengumuman Publik
 Route::get('/pengumuman', [PengumumanPublikController::class, 'index'])->name('pengumuman.publik.index');
 
-// Kontak
+// Kontak Publik
 Route::get('/kontak', [KontakPublikController::class, 'index'])->name('kontak.publik.index');
 Route::post('/kontak', [KontakPublikController::class, 'send'])->name('kontak.publik.send');
 
 // Pendaftaran
 Route::get('/pendaftaran', [PendaftaranController::class, 'index'])->name('pendaftaran');
 Route::post('/pendaftaran', [PendaftaranController::class, 'store'])->name('pendaftaran.store');
+
+// Tentang
+Route::get('/tentang', [PublicController::class, 'tentang'])->name('tentang');
+
 
 // ==========================
 // FALLBACK

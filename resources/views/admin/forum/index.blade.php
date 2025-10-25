@@ -1,6 +1,9 @@
-@extends('layouts.admin')
-@section('title','Forum Admin')
-@section('content')
+<x-layouts.admin title="index.blade">
+<x-layouts.admin title="index.blade">
+
+
+
+
 <h2 class="text-xl font-bold mb-4">Daftar Forum</h2>
 <a href="{{ route('admin.forum.create') }}" class="px-4 py-2 bg-indigo-600 text-white rounded-lg mb-4 inline-block">Tambah Topik</a>
 <table class="min-w-full bg-white">
@@ -28,4 +31,13 @@
     </tbody>
 </table>
 {{ $forums->links() }}
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

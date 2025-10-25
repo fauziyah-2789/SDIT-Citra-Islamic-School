@@ -1,7 +1,4 @@
-@extends('layouts.guest')
-
-@section('content')
-<div class="container mx-auto px-4 py-12">
+<x-layouts.guest><div class="container mx-auto px-4 py-12">
     <h1 class="text-3xl font-bold text-center mb-10 text-gray-800">Pengumuman Sekolah</h1>
 
     @if($pengumumans->count() > 0)
@@ -26,5 +23,8 @@
     @else
         <p class="text-center text-gray-600">Belum ada pengumuman yang tersedia.</p>
     @endif
-</div>
-@endsection
+</div></x-layouts.guest>
+
+
+
+

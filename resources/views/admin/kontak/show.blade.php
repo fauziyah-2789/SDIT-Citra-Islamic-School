@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="show.blade">
+<x-layouts.admin title="show.blade">
 
-@section('title', 'Detail Pesan Kontak - Admin Sekolah Citra')
 
-@section('content')
+
+
+
+
 <div class="p-6 bg-white rounded shadow max-w-3xl mx-auto">
     <h2 class="text-2xl font-bold mb-4">Detail Pesan Kontak</h2>
 
@@ -15,4 +18,13 @@
 
     <a href="{{ route('admin.kontak.index') }}" class="mt-4 inline-block text-[#D4A373] hover:underline">← Kembali</a>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

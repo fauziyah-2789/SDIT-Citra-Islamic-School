@@ -1,7 +1,4 @@
-@extends('layouts.guest')
-
-@section('content')
-<div class="container mx-auto px-4 py-12 max-w-3xl">
+<x-layouts.guest><div class="container mx-auto px-4 py-12 max-w-3xl">
     <div class="bg-white shadow-md rounded-2xl p-8">
         <h1 class="text-3xl font-bold mb-4 text-gray-800">{{ $pengumuman->judul }}</h1>
         <p class="text-gray-500 text-sm mb-6">{{ $pengumuman->created_at->translatedFormat('d F Y') }}</p>
@@ -16,5 +13,7 @@
             </a>
         </div>
     </div>
-</div>
-@endsection
+</div></x-layouts.guest>
+
+
+

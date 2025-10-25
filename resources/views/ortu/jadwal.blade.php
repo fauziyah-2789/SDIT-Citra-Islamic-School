@@ -1,6 +1,10 @@
-@extends('layouts.ortu')
+<x-layouts.ortu title="jadwal.blade">
+<x-layouts.ortu title="jadwal.blade">
 
-@section('content')
+
+
+
+
 <div class="container mx-auto p-4">
     <h1 class="text-2xl font-bold mb-4">Jadwal Anak</h1>
     <table class="table-auto w-full border">
@@ -24,4 +28,13 @@
         </tbody>
     </table>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.ortu>
+</x-layouts.ortu>

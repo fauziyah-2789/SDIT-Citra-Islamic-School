@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="index.blade">
+<x-layouts.admin title="index.blade">
 
-@section('title', 'Daftar Jadwal')
 
-@section('content')
+
+
+
+
 <div class="container">
     <h1 class="mb-4">Daftar Jadwal</h1>
 
@@ -52,4 +55,13 @@
 
     {{ $jadwals->links() }}
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

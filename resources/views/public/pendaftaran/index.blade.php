@@ -1,9 +1,4 @@
-@extends('layouts.guest')
-
-@section('title', 'Pendaftaran Siswa Baru SD')
-
-@section('content')
-<section class="bg-gradient-to-br from-yellow-50 to-yellow-100 min-h-screen py-12">
+<x-layouts.guest><section class="bg-gradient-to-br from-yellow-50 to-yellow-100 min-h-screen py-12">
     <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl p-8">
         <h2 class="text-3xl font-bold text-center text-yellow-700 mb-6">
             Formulir Pendaftaran Siswa Baru SD
@@ -113,5 +108,7 @@
             </div>
         </form>
     </div>
-</section>
-@endsection
+</section></x-layouts.guest>
+
+
+

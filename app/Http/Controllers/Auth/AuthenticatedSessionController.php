@@ -8,32 +8,23 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * ✅ Tampilkan halaman login
-     */
     public function create()
     {
         return view('auth.login');
     }
 
-    /**
-     * ✅ Proses login
-     */
     public function store(Request $request)
     {
-        // Validasi input
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-        // Coba login
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
             $user = Auth::user();
 
-            // Pastikan kolom role ada
             if (!$user->role) {
                 Auth::logout();
                 return back()->withErrors([
@@ -41,8 +32,8 @@ class AuthenticatedSessionController extends Controller
                 ])->onlyInput('email');
             }
 
-            // ✅ Karena role adalah string, langsung pakai $user->role
-            switch ($user->role) {
+            // ✅ pakai role->name
+            switch ($user->role->name) {
                 case 'admin':
                     return redirect()->route('admin.dashboard');
                 case 'guru':
@@ -57,19 +48,14 @@ class AuthenticatedSessionController extends Controller
             }
         }
 
-        // Jika gagal login
         return back()->withErrors([
             'email' => 'Email atau kata sandi salah.',
         ])->onlyInput('email');
     }
 
-    /**
-     * ✅ Logout user
-     */
     public function destroy(Request $request)
     {
         Auth::logout();
-
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 

@@ -1,9 +1,4 @@
-@extends('layouts.guest')
-
-@section('title', 'Kontak Kami')
-
-@section('content')
-<!-- Hero -->
+<x-layouts.guest><!-- Hero -->
 <section class="bg-gradient-to-r from-emerald-300 to-blue-400 py-20 text-white text-center">
     <h1 class="text-4xl font-bold">Hubungi Kami</h1>
     <p class="text-white/90 mt-2">Kami siap membantu Anda mendapatkan informasi seputar SDIT Citra Islamic School</p>
@@ -44,5 +39,7 @@
             <p class="text-gray-700 mt-1">Email: info@sditcitra.sch.id | Telepon: (021) 1234 5678</p>
         </div>
     </div>
-</section>
-@endsection
+</section></x-layouts.guest>
+
+
+

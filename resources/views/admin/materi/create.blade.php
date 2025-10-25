@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="create.blade">
+<x-layouts.admin title="create.blade">
 
-@section('title', 'Tambah Materi')
 
-@section('content')
+
+
+
+
 <h1 class="text-2xl font-bold mb-4">Tambah Materi</h1>
 
 <form action="{{ route('admin.materi.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
@@ -21,4 +24,13 @@
     </div>
     <button type="submit" class="bg-[#D4A373] text-white px-4 py-2 rounded hover:bg-[#B07D62]">Simpan</button>
 </form>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

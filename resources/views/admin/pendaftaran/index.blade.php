@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="index.blade">
+<x-layouts.admin title="index.blade">
 
-@section('title', 'Data Pendaftaran')
 
-@section('content')
+
+
+
+
 <div class="p-6 bg-white rounded-2xl shadow-md">
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-semibold text-emerald-600">Data Pendaftar Baru</h1>
@@ -44,4 +47,13 @@
         </tbody>
     </table>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

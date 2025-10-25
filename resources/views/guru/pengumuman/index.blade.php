@@ -1,6 +1,10 @@
-@extends('layouts.guru')
+<x-layouts.guru title="index.blade">
+<x-layouts.guru title="index.blade">
 
-@section('content')
+
+
+
+
 <div class="container mx-auto p-4">
     <h1 class="text-2xl font-bold mb-4">Pengumuman</h1>
     <a href="{{ route('guru.pengumuman.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">Tambah Pengumuman</a>
@@ -33,4 +37,13 @@
         {{ $pengumumans->links() }}
     </div>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.guru>
+</x-layouts.guru>

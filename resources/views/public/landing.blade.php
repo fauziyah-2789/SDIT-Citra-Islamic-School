@@ -1,10 +1,4 @@
-@extends('layouts.guest')
-
-@section('title', 'Beranda - SDIT Citra')
-
-@section('content')
-
-<!-- HERO -->
+<x-layouts.guest><!-- HERO -->
 <section id="hero" class="relative bg-gradient-to-r from-green-100 via-blue-50 to-green-50 min-h-[80vh] flex items-center">
     <div class="max-w-7xl mx-auto px-6 md:px-12 text-center md:text-left">
         <h1 class="text-4xl md:text-6xl font-bold text-emerald-700 mb-4" data-aos="fade-right">SDIT Citra Islamic School</h1>
@@ -165,6 +159,8 @@
         @click="window.scrollTo({top:0,behavior:'smooth'})"
         class="fixed bottom-6 right-6 md:bottom-8 md:left-8 bg-gradient-to-r from-green-500 to-blue-400 text-white p-3 rounded-full shadow-lg hover:opacity-90 transition z-50">
     ⬆️
-</button>
+</button></x-layouts.guest>
 
-@endsection
+
+
+

@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="index.blade">
+<x-layouts.admin title="index.blade">
 
-@section('title','Hero Landing Page')
 
-@section('content')
+
+
+
+
 <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow">
     <h2 class="text-2xl font-bold mb-4">Hero Landing Page</h2>
 
@@ -34,4 +37,13 @@
         <button class="px-6 py-2 bg-blue-600 text-white rounded">Update Hero</button>
     </form>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

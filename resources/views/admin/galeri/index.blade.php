@@ -1,8 +1,10 @@
-@extends('layouts.admin')
+<x-layouts.admin title="index.blade">
+<x-layouts.admin title="index.blade">
 
-@section('title', 'Manajemen Galeri')
 
-@section('content')
+
+
+
 <div class="p-6">
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-bold text-emerald-600">Daftar Galeri</h1>
@@ -47,4 +49,14 @@
         {{ $galeris->links('pagination::tailwind') }}
     </div>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

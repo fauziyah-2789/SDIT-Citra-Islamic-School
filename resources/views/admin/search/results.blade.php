@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="results.blade">
+<x-layouts.admin title="results.blade">
 
-@section('title', 'Hasil Pencarian')
 
-@section('content')
+
+
+
+
 <div class="p-6">
   <h1 class="text-2xl font-bold mb-4">Hasil Pencarian untuk: <span class="text-indigo-600">"{{ $query }}"</span></h1>
 
@@ -57,4 +60,13 @@
 
   @endif
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

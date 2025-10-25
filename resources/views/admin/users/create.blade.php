@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="create.blade">
+<x-layouts.admin title="create.blade">
 
-@section('title', 'Tambah Pengguna')
 
-@section('content')
+
+
+
+
 <h1 class="text-2xl font-bold mb-6 text-gray-800">Tambah Pengguna Baru</h1>
 
 <div class="bg-white p-6 rounded-lg shadow">
@@ -39,4 +42,13 @@
         </div>
     </form>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

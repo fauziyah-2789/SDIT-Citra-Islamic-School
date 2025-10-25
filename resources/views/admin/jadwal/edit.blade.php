@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="edit.blade">
+<x-layouts.admin title="edit.blade">
 
-@section('title', 'Tambah Jadwal')
 
-@section('content')
+
+
+
+
 <div class="container">
     <h1 class="mb-4">Tambah Jadwal</h1>
 
@@ -37,4 +40,13 @@
         <a href="{{ route('admin.jadwal.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

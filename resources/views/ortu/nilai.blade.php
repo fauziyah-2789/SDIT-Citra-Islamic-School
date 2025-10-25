@@ -1,6 +1,10 @@
-@extends('layouts.ortu')
+<x-layouts.ortu title="nilai.blade">
+<x-layouts.ortu title="nilai.blade">
 
-@section('content')
+
+
+
+
 <div class="container mx-auto p-4">
     <h1 class="text-2xl font-bold mb-4">Nilai Anak</h1>
     <table class="table-auto w-full border">
@@ -25,4 +29,13 @@
         {{ $nilais->links() }}
     </div>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.ortu>
+</x-layouts.ortu>

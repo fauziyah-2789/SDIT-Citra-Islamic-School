@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="index.blade">
+<x-layouts.admin title="index.blade">
 
-@section('title', 'Materi')
 
-@section('content')
+
+
+
+
 <div class="flex justify-between mb-4">
     <h1 class="text-2xl font-bold">Daftar Materi</h1>
     <a href="{{ route('admin.materi.create') }}" class="bg-[#D4A373] text-white px-4 py-2 rounded hover:bg-[#B07D62]">Tambah Materi</a>
@@ -45,4 +48,13 @@
 </table>
 
 {{ $materis->links() }}
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

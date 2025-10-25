@@ -1,7 +1,10 @@
-@extends('layouts.guru')
-@section('title', 'Edit Profil')
+<x-layouts.guru title="edit.blade">
+<x-layouts.guru title="edit.blade">
 
-@section('content')
+
+
+
+
 <h1 class="text-2xl font-bold mb-4">Edit Profil</h1>
 
 <form action="{{ route('guru.profil.update') }}" method="POST" enctype="multipart/form-data" class="space-y-4 bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
@@ -24,4 +27,13 @@
     </div>
     <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Simpan Perubahan</button>
 </form>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.guru>
+</x-layouts.guru>

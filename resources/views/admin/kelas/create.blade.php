@@ -1,6 +1,10 @@
-@extends('layouts.admin')
+<x-layouts.admin title="create.blade">
+<x-layouts.admin title="create.blade">
 
-@section('content')
+
+
+
+
 <div class="container">
     <h1 class="mb-4">Tambah Kelas</h1>
 
@@ -23,4 +27,13 @@
         <a href="{{ route('admin.kelas.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

@@ -1,6 +1,10 @@
-@extends('layouts.admin')
+<x-layouts.admin title="index.blade">
+<x-layouts.admin title="index.blade">
 
-@section('content')
+
+
+
+
 <div class="container">
     <h1>Profil Guru</h1>
     <table class="table mt-3">
@@ -29,4 +33,13 @@
         </tbody>
     </table>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

@@ -1,6 +1,9 @@
-@extends('layouts.guru')
-@section('title', 'Jadwal Mengajar - Guru')
-@section('content')
+<x-layouts.guru title="index.blade">
+<x-layouts.guru title="index.blade">
+
+
+
+
 <h1 class="text-2xl font-bold mb-4">Jadwal Mengajar</h1>
 
 <a href="{{ route('guru.jadwal.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mb-4 inline-block">Tambah Jadwal</a>
@@ -37,4 +40,13 @@
     </tbody>
 </table>
 {{ $jadwals->links() }}
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.guru>
+</x-layouts.guru>

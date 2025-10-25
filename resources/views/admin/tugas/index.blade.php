@@ -1,6 +1,10 @@
-@extends('layouts.admin')
+<x-layouts.admin title="index.blade">
+<x-layouts.admin title="index.blade">
 
-@section('content')
+
+
+
+
 <div class="container">
     <h1>Data Tugas</h1>
 
@@ -43,4 +47,13 @@
         {{ $tugas->links() }}
     </div>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

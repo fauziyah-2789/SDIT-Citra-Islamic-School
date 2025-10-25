@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="index.blade">
+<x-layouts.admin title="index.blade">
 
-@section('title', 'Manajemen Orang Tua')
 
-@section('content')
+
+
+
+
 <div class="p-6 bg-white rounded-xl shadow-lg">
     <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Daftar Akun Orang Tua</h2>
 
@@ -61,4 +64,13 @@
         {{ $ortus->links() }}
     </div>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

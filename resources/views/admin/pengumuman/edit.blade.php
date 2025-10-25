@@ -1,6 +1,10 @@
-@extends('layouts.admin')
+<x-layouts.admin title="edit.blade">
+<x-layouts.admin title="edit.blade">
 
-@section('content')
+
+
+
+
 <div class="container">
     <h1>Edit Pengumuman</h1>
     <form action="{{ route('pengumuman.update', $pengumuman->id) }}" method="POST">
@@ -20,4 +24,13 @@
         <button class="btn btn-success">Update</button>
     </form>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

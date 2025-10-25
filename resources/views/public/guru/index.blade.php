@@ -1,9 +1,4 @@
-@extends('layouts.guest')
-
-@section('title', 'Daftar Guru - Sekolah Citra')
-
-@section('content')
-<section class="mb-20 max-w-6xl mx-auto px-6">
+<x-layouts.guest><section class="mb-20 max-w-6xl mx-auto px-6">
     <h2 class="text-3xl md:text-4xl font-bold text-[#D4A373] mb-12 text-center">Daftar Guru</h2>
 
     <div class="grid md:grid-cols-3 gap-8">
@@ -20,5 +15,7 @@
             </div>
         @endforeach
     </div>
-</section>
-@endsection
+</section></x-layouts.guest>
+
+
+

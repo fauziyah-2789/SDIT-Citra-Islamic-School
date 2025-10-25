@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="show.blade">
+<x-layouts.admin title="show.blade">
 
-@section('title', 'Detail Galeri')
 
-@section('content')
+
+
+
+
 <div class="p-6 max-w-4xl mx-auto">
     <div class="bg-white p-6 rounded-xl shadow-md">
         <h1 class="text-3xl font-bold text-emerald-600 mb-4">{{ $galeri->judul }}</h1>
@@ -21,4 +24,13 @@
         </div>
     </div>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

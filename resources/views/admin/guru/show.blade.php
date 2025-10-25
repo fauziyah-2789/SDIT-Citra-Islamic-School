@@ -1,6 +1,10 @@
-@extends('layouts.admin')
+<x-layouts.admin title="show.blade">
+<x-layouts.admin title="show.blade">
 
-@section('content')
+
+
+
+
 <div class="p-6 bg-white rounded shadow">
     <h2 class="text-xl font-bold">{{ $guru->nama }}</h2>
 
@@ -18,4 +22,13 @@
         <p class="text-gray-500 mt-2">Belum ada siswa di kelas ini.</p>
     @endif
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

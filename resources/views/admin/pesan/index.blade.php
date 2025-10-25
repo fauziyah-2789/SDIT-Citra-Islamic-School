@@ -1,6 +1,10 @@
-@extends('layouts.admin')
+<x-layouts.admin title="index.blade">
+<x-layouts.admin title="index.blade">
 
-@section('content')
+
+
+
+
 <div class="container mx-auto p-4">
     <h1 class="text-2xl font-bold mb-4">Data Pesan</h1>
     <a href="{{ route('admin.pesan.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">Tambah Pesan</a>
@@ -37,4 +41,13 @@
         {{ $pesans->links() }}
     </div>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

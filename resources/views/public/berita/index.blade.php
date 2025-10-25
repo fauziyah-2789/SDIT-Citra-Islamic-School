@@ -1,9 +1,4 @@
-@extends('layouts.guest')
-
-@section('title', 'Berita Sekolah')
-
-@section('content')
-    <!-- Hero Section -->
+<x-layouts.guest><!-- Hero Section -->
     <section class="bg-gradient-to-r from-blue-600 to-blue-400 text-white py-16 text-center">
         <div class="container mx-auto px-6">
             <h1 class="text-4xl md:text-5xl font-bold mb-3">Berita Sekolah</h1>
@@ -46,5 +41,7 @@
                 </div>
             @endif
         </div>
-    </section>
-@endsection
+    </section></x-layouts.guest>
+
+
+

@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="index.blade">
+<x-layouts.admin title="index.blade">
 
-@section('title', 'Nilai')
 
-@section('content')
+
+
+
+
 <div class="flex justify-between mb-4">
     <h1 class="text-2xl font-bold">Daftar Nilai</h1>
     <a href="{{ route('admin.nilai.create') }}" class="bg-[#2E8B57] text-white px-4 py-2 rounded hover:bg-[#3CB371]">Tambah Nilai</a>
@@ -39,4 +42,13 @@
 </table>
 
 {{ $nilais->links() }}
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

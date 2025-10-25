@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="register.blade">
+<x-layouts.admin title="register.blade">
 
-@section('title', 'Tambah Akun Guru')
 
-@section('content')
+
+
+
+
 <div class="max-w-3xl mx-auto bg-white p-6 rounded shadow">
     <h2 class="text-xl font-semibold mb-4 text-[#B07D62]">Tambah Akun Guru</h2>
 
@@ -56,4 +59,13 @@
         </button>
     </form>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

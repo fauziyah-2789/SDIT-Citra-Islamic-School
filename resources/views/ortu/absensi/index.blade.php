@@ -1,8 +1,11 @@
-@extends('layouts.ortu')
+<x-layouts.ortu title="index.blade">
+<x-layouts.ortu title="index.blade">
 
-@section('title', 'Absensi Anak')
 
-@section('content')
+
+
+
+
 <div class="container mx-auto px-4 py-6">
     <h1 class="text-2xl font-bold text-gray-700 mb-4">Data Absensi Anak</h1>
 
@@ -47,4 +50,13 @@
         </div>
     @endif
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.ortu>
+</x-layouts.ortu>

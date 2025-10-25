@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="index.blade">
+<x-layouts.admin title="index.blade">
 
-@section('title', 'Profil Sekolah')
 
-@section('content')
+
+
+
+
 <h1 class="text-2xl font-bold mb-6 text-gray-800">Profil Sekolah</h1>
 
 @if (session('success'))
@@ -69,4 +72,13 @@
         </div>
     </form>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

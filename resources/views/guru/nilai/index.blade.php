@@ -1,8 +1,11 @@
-@extends('layouts.guru')
+<x-layouts.guru title="index.blade">
+<x-layouts.guru title="index.blade">
 
-@section('title', 'Nilai')
 
-@section('content')
+
+
+
+
 <div class="flex justify-between items-center mb-6">
     <h1 class="text-2xl font-bold">Daftar Nilai</h1>
     <a href="{{ route('guru.nilai.create') }}" class="bg-[#B07D62] text-white px-4 py-2 rounded-lg hover:bg-[#8D6E63]">Tambah Nilai</a>
@@ -39,4 +42,13 @@
         @endforelse
     </tbody>
 </table>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.guru>
+</x-layouts.guru>

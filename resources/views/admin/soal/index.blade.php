@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="index.blade">
+<x-layouts.admin title="index.blade">
 
-@section('title', 'Soal')
 
-@section('content')
+
+
+
+
 <div class="flex justify-between mb-4">
     <h1 class="text-2xl font-bold">Daftar Soal</h1>
     <a href="{{ route('admin.soal.create') }}" class="bg-[#6A5ACD] text-white px-4 py-2 rounded hover:bg-[#7B68EE]">Tambah Soal</a>
@@ -39,4 +42,13 @@
 </table>
 
 {{ $soals->links() }}
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="edit.blade">
+<x-layouts.admin title="edit.blade">
 
-@section('title', 'Edit Fasilitas')
 
-@section('content')
+
+
+
+
 <h1 class="text-2xl font-bold mb-6 text-gray-800">Edit Fasilitas Sekolah</h1>
 
 <div class="bg-white p-6 rounded-xl shadow-lg">
@@ -38,4 +41,13 @@
         </div>
     </form>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

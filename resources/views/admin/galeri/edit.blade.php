@@ -1,8 +1,11 @@
-@extends('layouts.admin')
+<x-layouts.admin title="edit.blade">
+<x-layouts.admin title="edit.blade">
 
-@section('title', 'Edit Galeri')
 
-@section('content')
+
+
+
+
 <div class="p-6 max-w-3xl mx-auto">
     <h1 class="text-2xl font-bold text-emerald-600 mb-6">Edit Foto Galeri</h1>
 
@@ -34,4 +37,13 @@
         </div>
     </form>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

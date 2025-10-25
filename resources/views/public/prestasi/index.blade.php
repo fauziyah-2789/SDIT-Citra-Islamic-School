@@ -1,9 +1,4 @@
-@extends('layouts.guest')
-
-@section('title', 'Prestasi Siswa')
-
-@section('content')
-<section class="bg-gradient-to-r from-emerald-300 to-blue-400 py-20 text-white text-center">
+<x-layouts.guest><section class="bg-gradient-to-r from-emerald-300 to-blue-400 py-20 text-white text-center">
     <h1 class="text-4xl font-bold">Prestasi Siswa</h1>
     <p class="text-white/90 mt-2">Kumpulan prestasi siswa SDIT Citra Islamic School dari tingkat lokal hingga nasional</p>
 </section>
@@ -32,5 +27,7 @@
             </div>
         @endif
     </div>
-</section>
-@endsection
+</section></x-layouts.guest>
+
+
+

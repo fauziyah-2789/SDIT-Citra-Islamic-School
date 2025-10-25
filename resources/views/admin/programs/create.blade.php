@@ -1,6 +1,9 @@
-@extends('layouts.admin')
-@section('title','Tambah Program')
-@section('content')
+<x-layouts.admin title="create.blade">
+<x-layouts.admin title="create.blade">
+
+
+
+
 <div class="max-w-2xl mx-auto">
   <h1 class="text-xl font-bold mb-4">Tambah Program</h1>
   <form action="{{ route('admin.programs.store') }}" method="POST">
@@ -17,4 +20,13 @@
     </div>
   </form>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

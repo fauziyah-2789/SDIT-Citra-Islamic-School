@@ -1,8 +1,11 @@
-@extends('layouts.guru')
+<x-layouts.guru title="dashboard.blade">
+<x-layouts.guru title="dashboard.blade">
 
-@section('title', 'Dashboard Guru')
 
-@section('content')
+
+
+
+
 
 @php
     // Quick Stats Guru
@@ -54,4 +57,13 @@
     @endforeach
 </div>
 
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.guru>
+</x-layouts.guru>

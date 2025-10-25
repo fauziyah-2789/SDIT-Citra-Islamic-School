@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -12,27 +13,28 @@ class GuruSeeder extends Seeder
 {
     public function run(): void
     {
-        $guruRole = Role::where('name', 'guru')->first();
+        $role = Role::where('name', 'guru')->first();
 
-        // Buat akun user guru
-        $user = User::updateOrCreate(
-            ['email' => 'guru@sekolah.com'],
+        $guruUser = User::updateOrCreate(
+            ['email' => 'guru@mail.com'],
             [
-                'name'     => 'Guru A',
+                'name'     => 'Guru Test',
                 'password' => Hash::make('guru123'),
-                'role'     => 'guru',
+                'role_id'  => $role->id,
             ]
         );
 
-        // Buat data guru di tabel gurus
         Guru::updateOrCreate(
-            ['user_id' => $user->id],
+            ['user_id' => $guruUser->id],
             [
-                'nama'    => 'Guru A',
-                'mapel'   => 'Matematika',
-                'profesi' => 'Guru Tetap',
-                'foto'    => null,
+                'nip'      => '123456789',
+                'nama'     => $guruUser->name,
+                'mapel'    => 'Matematika',
+                'profesi'  => 'Guru',
+                'no_hp'    => '08123456789',
             ]
         );
+
+        $this->command->info('Guru user berhasil dibuat!');
     }
 }

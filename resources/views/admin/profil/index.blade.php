@@ -1,6 +1,10 @@
-@extends('layouts.admin')
+<x-layouts.admin title="index.blade">
+<x-layouts.admin title="index.blade">
 
-@section('content')
+
+
+
+
 <div class="bg-white shadow rounded-lg p-6">
     <h2 class="text-2xl font-bold mb-4">Profil Sekolah</h2>
 
@@ -37,4 +41,13 @@
 
     <a href="{{ route('admin.profil.edit') }}" class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded">Edit Profil</a>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

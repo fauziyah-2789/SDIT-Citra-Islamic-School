@@ -1,6 +1,9 @@
-@extends('layouts.admin')
-@section('title','Program Sekolah')
-@section('content')
+<x-layouts.admin title="index.blade">
+<x-layouts.admin title="index.blade">
+
+
+
+
 <div class="space-y-4">
   <div class="flex justify-between items-center">
     <h1 class="text-xl font-bold">Program Sekolah</h1>
@@ -27,4 +30,13 @@
     @endforelse
   </div>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

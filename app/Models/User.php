@@ -15,6 +15,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
+        'foto', // optional
     ];
 
     protected $hidden = [
@@ -25,7 +26,7 @@ class User extends Authenticatable
     // Relasi ke Role
     public function role()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(Role::class); // pastikan Role model ada
     }
 
     // Relasi ke Guru
@@ -34,12 +35,25 @@ class User extends Authenticatable
         return $this->hasOne(Guru::class, 'user_id');
     }
 
-    // ❌ Siswa dihapus karena tidak login
-    // public function siswa() { return $this->hasOne(Siswa::class, 'user_id'); }
-
-    // ✅ Relasi ke Orang Tua
+    // Relasi ke Orang Tua
     public function orangTua()
     {
         return $this->hasOne(Ortu::class, 'user_id');
+    }
+
+    // Helper cek role
+    public function isAdmin()
+    {
+        return $this->role->name === 'admin';
+    }
+
+    public function isGuru()
+    {
+        return $this->role->name === 'guru';
+    }
+
+    public function isOrtu()
+    {
+        return $this->role->name === 'ortu';
     }
 }

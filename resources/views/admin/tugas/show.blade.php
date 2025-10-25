@@ -1,6 +1,10 @@
-@extends('layouts.admin')
+<x-layouts.admin title="show.blade">
+<x-layouts.admin title="show.blade">
 
-@section('content')
+
+
+
+
 <div class="container">
     <h1>Detail Tugas</h1>
     <ul class="list-group">
@@ -10,4 +14,13 @@
     </ul>
     <a href="{{ route('tugas.index') }}" class="btn btn-secondary mt-3">Kembali</a>
 </div>
-@endsection
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>

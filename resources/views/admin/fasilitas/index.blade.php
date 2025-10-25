@@ -1,8 +1,10 @@
-@extends('layouts.admin')
+<x-layouts.admin title="index.blade">
+<x-layouts.admin title="index.blade">
 
-@section('title', 'Fasilitas Sekolah')
 
-@section('content')
+
+
+
 <div class="flex items-center justify-between mb-6">
     <h1 class="text-2xl font-bold text-gray-800">Daftar Fasilitas Sekolah</h1>
     <a href="{{ route('admin.fasilitas.create') }}"
@@ -63,4 +65,14 @@
 <div class="mt-6">
     {{ $fasilitas->links('pagination::tailwind') }}
 </div>
-@endsection
+
+
+
+
+
+
+
+
+
+</x-layouts.admin>
+</x-layouts.admin>
