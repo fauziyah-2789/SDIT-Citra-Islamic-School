@@ -4,7 +4,7 @@
 
 
 
-<x-admin-layout title="Edit Berita">
+<x-layout.admin title="Edit Berita">
     <div class="p-6 max-w-4xl mx-auto">
         <h1 class="text-2xl font-bold text-emerald-600 mb-6">Edit Berita</h1>
 
@@ -43,7 +43,7 @@
             </div>
         </form>
     </div>
-</x-admin-layout>
+</x-layout.admin>
 
 
 

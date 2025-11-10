@@ -4,7 +4,7 @@
 
 
 
-<x-admin-layout title="Detail Berita">
+<x-layout.admin title="Detail Berita">
     <div class="p-6 max-w-5xl mx-auto">
         <div class="bg-white p-6 rounded-xl shadow-md">
             <h1 class="text-3xl font-bold text-emerald-600 mb-4">{{ $berita->judul }}</h1>
@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-</x-admin-layout>
+</x-layout.admin>
 
 
 

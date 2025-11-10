@@ -4,7 +4,7 @@
 
 
 
-<x-admin-layout title="Manajemen Berita">
+<x-layout.admin title="Manajemen Berita">
     <div class="p-6">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold text-emerald-600">Daftar Berita</h1>
@@ -57,7 +57,7 @@
             {{ $beritas->links('pagination::tailwind') }}
         </div>
     </div>
-</x-admin-layout>
+</x-layout.admin>
 
 
 

@@ -10,39 +10,64 @@ class EkstrakurikulerController extends Controller
 {
     public function index()
     {
-        $ekstras = Ekstrakurikuler::all();
-        return view('admin.ekstrakurikuler.index', compact('ekstras'));
+        $ekskul = Ekstrakurikuler::orderBy('nama')->get();
+        return view('admin.ekskul.index', compact('ekskul'));
     }
 
     public function create()
     {
-        return view('admin.ekstrakurikuler.create');
+        return view('admin.ekskul.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'nama' => 'required|max:255',
+            'deskripsi' => 'nullable',
+            'pembina' => 'nullable|max:255',
+            'foto_cover' => 'image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        Ekstrakurikuler::create($request->all());
-        return redirect()->route('admin.ekstrakurikuler.index')->with('success', 'Ekstrakurikuler berhasil ditambahkan.');
+        $data = $request->only(['nama', 'deskripsi', 'pembina', 'aktif']);
+
+        // Upload foto
+        if ($request->hasFile('foto_cover')) {
+            $data['foto_cover'] = $request->file('foto_cover')->store('ekskul', 'public');
+        }
+
+        Ekstrakurikuler::create($data);
+
+        return redirect()->route('admin.ekskul.index')->with('success', 'Ekstrakurikuler berhasil ditambahkan.');
     }
 
-    public function edit(Ekstrakurikuler $ekstrakurikuler)
+    public function edit(Ekstrakurikuler $ekskul)
     {
-        return view('admin.ekstrakurikuler.edit', compact('ekstrakurikuler'));
+        return view('admin.ekskul.edit', compact('ekskul'));
     }
 
-    public function update(Request $request, Ekstrakurikuler $ekstrakurikuler)
+    public function update(Request $request, Ekstrakurikuler $ekskul)
     {
-        $ekstrakurikuler->update($request->all());
-        return redirect()->route('admin.ekstrakurikuler.index')->with('success', 'Data berhasil diperbarui.');
+        $request->validate([
+            'nama' => 'required|max:255',
+            'deskripsi' => 'nullable',
+            'pembina' => 'nullable|max:255',
+            'foto_cover' => 'image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        $data = $request->only(['nama', 'deskripsi', 'pembina', 'aktif']);
+
+        if ($request->hasFile('foto_cover')) {
+            $data['foto_cover'] = $request->file('foto_cover')->store('ekskul', 'public');
+        }
+
+        $ekskul->update($data);
+
+        return redirect()->route('admin.ekskul.index')->with('success', 'Data ekskul diperbarui.');
     }
 
-    public function destroy(Ekstrakurikuler $ekstrakurikuler)
+    public function destroy(Ekstrakurikuler $ekskul)
     {
-        $ekstrakurikuler->delete();
-        return redirect()->route('admin.ekstrakurikuler.index')->with('success', 'Data berhasil dihapus.');
+        $ekskul->delete();
+        return redirect()->route('admin.ekskul.index')->with('success', 'Ekstrakurikuler berhasil dihapus.');
     }
 }

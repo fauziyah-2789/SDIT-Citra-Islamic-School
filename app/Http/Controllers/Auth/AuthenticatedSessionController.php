@@ -25,27 +25,22 @@ class AuthenticatedSessionController extends Controller
 
             $user = Auth::user();
 
-            if (!$user->role) {
+            if (!$user->role || !isset($user->role->name)) {
                 Auth::logout();
                 return back()->withErrors([
                     'email' => 'Akun tidak memiliki role yang valid.'
                 ])->onlyInput('email');
             }
 
-            // ✅ pakai role->name
-            switch ($user->role->name) {
-                case 'admin':
-                    return redirect()->route('admin.dashboard');
-                case 'guru':
-                    return redirect()->route('guru.dashboard');
-                case 'ortu':
-                    return redirect()->route('ortu.dashboard');
-                default:
-                    Auth::logout();
-                    return back()->withErrors([
-                        'email' => 'Role tidak dikenali.'
-                    ])->onlyInput('email');
-            }
+            // Redirect sesuai role
+            return match($user->role->name) {
+                'admin' => redirect()->route('admin.dashboard'),
+                'guru'  => redirect()->route('guru.dashboard'),
+                'ortu'  => redirect()->route('ortu.dashboard'),
+                default => back()->withErrors([
+                    'email' => 'Role tidak dikenali.'
+                ])->onlyInput('email'),
+            };
         }
 
         return back()->withErrors([
