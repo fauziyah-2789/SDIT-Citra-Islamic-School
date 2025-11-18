@@ -9,11 +9,10 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
             ],
-            refresh: true, // Auto reload ketika ada perubahan file blade/css/js
+            refresh: true,
         }),
     ],
 
-    // Alias supaya import JS lebih mudah (contoh: import x from '@/components/x')
     resolve: {
         alias: {
             '@': path.resolve(__dirname, 'resources/js'),
@@ -24,7 +23,14 @@ export default defineConfig({
     server: {
         host: 'localhost',
         port: 5173,
-        open: false, // ganti true kalau mau otomatis buka browser
+        open: false,
+
+        // ❗ FIX PENTING UNTUK WINDOWS (biar ga restart terus)
+        watch: {
+            usePolling: true,
+            interval: 300,
+        },
+
         hmr: {
             host: 'localhost',
         },
@@ -37,7 +43,6 @@ export default defineConfig({
         rollupOptions: {
             output: {
                 manualChunks: {
-                    // Pisahkan vendor JS agar cache lebih efisien dan cepat
                     vendor: ['alpinejs', 'aos', 'trix'],
                 },
             },
@@ -47,7 +52,7 @@ export default defineConfig({
     css: {
         preprocessorOptions: {
             css: {
-                charset: false, // hindari warning di beberapa browser
+                charset: false,
             },
         },
     },

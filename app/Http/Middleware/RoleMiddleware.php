@@ -28,7 +28,8 @@ class RoleMiddleware
             ]);
         }
 
-        $userRole = $user->role->name; // ✅ ambil nama role, bukan objek
+        // Ambil role langsung karena sekarang role sudah string
+        $userRole = $user->role;
 
         $allowedRoles = explode('|', $roles);
 

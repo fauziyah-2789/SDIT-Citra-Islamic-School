@@ -1,72 +1,41 @@
-<x-layouts.admin title="results.blade">
-<x-layouts.admin title="results.blade">
+<x-admin-layout title="Hasil Pencarian">
 
+<div class="space-y-4">
+    <x-admin.breadcrumb title="Pencarian" />
 
+    <div>
+        <h2 class="text-2xl font-semibold">Hasil Pencarian</h2>
+        <p class="text-sm text-gray-500">Kata kunci: <strong>{{ $query }}</strong></p>
+    </div>
 
-
-
-
-<div class="p-6">
-  <h1 class="text-2xl font-bold mb-4">Hasil Pencarian untuk: <span class="text-indigo-600">"{{ $query }}"</span></h1>
-
-  @if($berita->isEmpty() && $galeri->isEmpty() && $guru->isEmpty() && $siswa->isEmpty() && $users->isEmpty())
-      <p class="text-gray-600">Tidak ada hasil ditemukan.</p>
-  @else
-
-    @if(!$berita->isEmpty())
-      <h2 class="text-xl font-semibold mt-6 mb-2">📢 Berita</h2>
-      <ul class="list-disc ml-5 space-y-1">
-        @foreach($berita as $item)
-          <li><a href="{{ route('admin.berita.edit', $item->id) }}" class="text-indigo-600 hover:underline">{{ $item->judul }}</a></li>
-        @endforeach
-      </ul>
+    @if($message)
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 text-yellow-800 rounded">
+            {{ $message }}
+        </div>
     @endif
 
-    @if(!$galeri->isEmpty())
-      <h2 class="text-xl font-semibold mt-6 mb-2">🖼️ Galeri</h2>
-      <ul class="list-disc ml-5 space-y-1">
-        @foreach($galeri as $item)
-          <li><a href="{{ route('admin.galeri.edit', $item->id) }}" class="text-indigo-600 hover:underline">{{ $item->judul }}</a></li>
-        @endforeach
-      </ul>
-    @endif
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-    @if(!$guru->isEmpty())
-      <h2 class="text-xl font-semibold mt-6 mb-2">👨‍🏫 Guru</h2>
-      <ul class="list-disc ml-5 space-y-1">
-        @foreach($guru as $item)
-          <li>{{ $item->nama }} - {{ $item->mapel }}</li>
+        @foreach($results as $group => $items)
+        <div class="bg-white rounded-lg shadow-sm p-4">
+            <h3 class="font-semibold capitalize">{{ $group }} ({{ $counts[$group] ?? 0 }})</h3>
+            <ul class="mt-3 space-y-2">
+                @forelse($items as $item)
+                    <li class="flex justify-between items-center">
+                        <div class="font-medium">
+                            {{ $item->nama ?? $item->judul ?? $item->name }}
+                        </div>
+                        <a href="{{ url()->current() }}/../{{ $group }}/{{ $item->id }}/edit"
+                           class="text-emerald-600 text-sm hover:underline">Edit</a>
+                    </li>
+                @empty
+                    <li class="text-sm text-gray-500">Tidak ada data ditemukan.</li>
+                @endforelse
+            </ul>
+        </div>
         @endforeach
-      </ul>
-    @endif
 
-    @if(!$siswa->isEmpty())
-      <h2 class="text-xl font-semibold mt-6 mb-2">👩‍🎓 Siswa</h2>
-      <ul class="list-disc ml-5 space-y-1">
-        @foreach($siswa as $item)
-          <li>{{ $item->nama }} (NIS: {{ $item->nis }})</li>
-        @endforeach
-      </ul>
-    @endif
-
-    @if(!$users->isEmpty())
-      <h2 class="text-xl font-semibold mt-6 mb-2">👤 Pengguna</h2>
-      <ul class="list-disc ml-5 space-y-1">
-        @foreach($users as $item)
-          <li>{{ $item->name }} - {{ $item->email }}</li>
-        @endforeach
-      </ul>
-    @endif
-
-  @endif
+    </div>
 </div>
 
-
-
-
-
-
-
-
-</x-layouts.admin>
-</x-layouts.admin>
+</x-admin-layout>
