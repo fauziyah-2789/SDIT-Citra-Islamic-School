@@ -3,67 +3,40 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
     /**
-     * Tampilkan halaman login
+     * Display the login view.
      */
-    public function create()
+    public function create(): View
     {
         return view('auth.login');
     }
 
     /**
-     * Proses login
+     * Handle an incoming authentication request.
      */
-    public function store(Request $request)
+    public function store(LoginRequest $request): RedirectResponse
     {
-        // Validasi input
-        $credentials = $request->validate([
-            'email'    => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $request->authenticate();
 
-        // Attempt login dengan remember me
-        if (Auth::attempt($credentials, $request->boolean('remember'))) {
-            $request->session()->regenerate();
+        $request->session()->regenerate();
 
-            $user = Auth::user();
-
-            // Cek role valid
-            if (!$user->role || !in_array($user->role, ['admin', 'guru', 'ortu'])) {
-                Auth::logout();
-                return back()->withErrors([
-                    'email' => 'Akun tidak memiliki role yang valid.'
-                ])->onlyInput('email');
-            }
-
-            // Redirect sesuai role
-            return match($user->role) {
-                'admin' => redirect()->route('admin.dashboard'),
-                'guru'  => redirect()->route('guru.dashboard'),
-                'ortu'  => redirect()->route('ortu.dashboard'),
-                default => back()->withErrors([
-                    'email' => 'Role tidak dikenali.'
-                ])->onlyInput('email'),
-            };
-        }
-
-        // Jika login gagal
-        return back()->withErrors([
-            'email' => 'Email atau kata sandi salah.',
-        ])->onlyInput('email');
+        return redirect()->intended(route('dashboard'));
     }
 
     /**
-     * Logout user
+     * Destroy an authenticated session.
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request): RedirectResponse
     {
-        Auth::logout();
+        Auth::guard('web')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

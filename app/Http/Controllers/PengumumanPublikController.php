@@ -12,7 +12,8 @@ class PengumumanPublikController extends Controller
      */
     public function index()
     {
-        $pengumumans = Pengumuman::latest()->paginate(6);
+        // Kode ini sudah benar untuk halaman daftar pengumuman
+        $pengumumans = Pengumuman::latest()->paginate(6); 
 
         return view('public.pengumuman.index', compact('pengumumans'));
     }
@@ -22,6 +23,7 @@ class PengumumanPublikController extends Controller
      */
     public function show($slug)
     {
+        // Kode ini sudah benar untuk halaman detail pengumuman
         $pengumuman = Pengumuman::where('slug', $slug)->firstOrFail();
 
         return view('public.pengumuman.show', compact('pengumuman'));

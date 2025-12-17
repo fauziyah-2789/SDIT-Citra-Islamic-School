@@ -45,4 +45,5 @@
         @endforelse
     </div>
 
-</x-admin-layout>
+
+

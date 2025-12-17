@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
-| AUTH CONTROLLERS
+| AUTH CONTROLLER
 |--------------------------------------------------------------------------
 */
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -17,40 +17,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 */
 use App\Http\Controllers\ProfileController;
 
-/*
-|--------------------------------------------------------------------------
-| ADMIN CONTROLLERS
-|--------------------------------------------------------------------------
-*/
-use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
-use App\Http\Controllers\Admin\ProfilController;
-use App\Http\Controllers\Admin\ProfilSekolahController;
-use App\Http\Controllers\Admin\BeritaController;
-use App\Http\Controllers\Admin\GaleriController;
-use App\Http\Controllers\Admin\PrestasiController;
-use App\Http\Controllers\Admin\EkstrakurikulerController;
-use App\Http\Controllers\Admin\ForumController;
-use App\Http\Controllers\Admin\GuruController;
-use App\Http\Controllers\Admin\JadwalController;
-use App\Http\Controllers\Admin\KelasController;
-use App\Http\Controllers\Admin\KontakController;
-use App\Http\Controllers\Admin\LandingHeroController;
-use App\Http\Controllers\Admin\LaporanController;
-use App\Http\Controllers\Admin\MapelController;
-use App\Http\Controllers\Admin\MateriController;
-use App\Http\Controllers\Admin\NilaiController;
-use App\Http\Controllers\Admin\OrtuController;
-use App\Http\Controllers\Admin\PengumumanController;
-use App\Http\Controllers\Admin\PesanController;
-use App\Http\Controllers\Admin\SearchController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\SiswaController;
-use App\Http\Controllers\Admin\SoalController;
-use App\Http\Controllers\Admin\StatistikController;
-use App\Http\Controllers\Admin\TestimoniController;
-use App\Http\Controllers\Admin\TugasController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\GaleriEskulController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -102,13 +69,13 @@ use App\Http\Controllers\PengumumanPublikController;
 */
 Route::controller(AuthenticatedSessionController::class)->group(function () {
     Route::get('/login', 'create')->name('login');
-    Route::post('/login', 'store');
+    Route::post('/login', 'store')->name('login.store');   // <-- FIX
     Route::post('/logout', 'destroy')->name('logout');
 });
 
 /*
 |--------------------------------------------------------------------------
-| GLOBAL PROFILE (BUKAN ADMIN)
+| GLOBAL PROFILE
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth')->group(function () {
@@ -123,68 +90,169 @@ Route::middleware('auth')->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::get('/dashboard', function () {
-    return match (Auth::user()->role->name ?? '') {
+
+    $role = Auth::user()->role ?? null;
+
+    return match ($role) {
         'admin' => redirect()->route('admin.dashboard'),
         'guru'  => redirect()->route('guru.dashboard'),
         'ortu'  => redirect()->route('ortu.dashboard'),
-        default => redirect()->route('landing'),
+        default => redirect()->route('public.landing'),
     };
 })->middleware('auth')->name('dashboard');
 
 /*
 |--------------------------------------------------------------------------
-| ADMIN AREA
+| ADMIN
 |--------------------------------------------------------------------------
 */
+/*
+|--------------------------------------------------------------------------
+| ADMIN
+|--------------------------------------------------------------------------
+*/
+// PASTIKAN SEMUA CONTROLLER DI-IMPORT DENGAN BENAR DI BAGIAN ATAS FILE routes/web.php
+
+use App\Http\Controllers\Admin\AbsensiController; 
+use App\Http\Controllers\Admin\DashboardController as AdminDashboard; 
+use App\Http\Controllers\Admin\SearchController;
+use App\Http\Controllers\Admin\ProfileAdminController; // DUKUNGAN UNTUK ProfileAdminController.php
+use App\Http\Controllers\Admin\ProfilSekolahController;
+use App\Http\Controllers\Admin\BeritaController;
+use App\Http\Controllers\Admin\GaleriController;
+use App\Http\Controllers\Admin\PrestasiController;
+use App\Http\Controllers\Admin\EkstrakurikulerController;
+use App\Http\Controllers\Admin\GaleriEskulController; // Galeri Eskul tidak ada di daftar Controller, diasumsikan ada.
+use App\Http\Controllers\Admin\ForumController;
+use App\Http\Controllers\Admin\GuruController;
+use App\Http\Controllers\Admin\JadwalController;
+use App\Http\Controllers\Admin\KelasController;
+use App\Http\Controllers\Admin\KontakController;
+use App\Http\Controllers\Admin\LandingHeroController;
+use App\Http\Controllers\Admin\LaporanController;
+use App\Http\Controllers\Admin\MapelController;
+use App\Http\Controllers\Admin\MateriController;
+use App\Http\Controllers\Admin\NilaiController;
+use App\Http\Controllers\Admin\OrtuController;
+use App\Http\Controllers\Admin\PengumumanController;
+use App\Http\Controllers\Admin\PesanController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\SiswaController;
+use App\Http\Controllers\Admin\SoalController;
+use App\Http\Controllers\Admin\StatistikController;
+use App\Http\Controllers\Admin\TestimoniController;
+use App\Http\Controllers\Admin\TugasController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\FasilitasController;
+use App\Http\Controllers\Admin\ProgramController; 
+use App\Http\Controllers\Admin\LandingSettingController; 
+use App\Http\Controllers\Admin\RoleController;
+
 Route::middleware(['auth', 'role:admin'])
-    ->prefix('admin')
-    ->as('admin.')
+    ->prefix('admin') // URL prefix: /admin
+    ->as('admin.') // Route name prefix: admin.
     ->group(function () {
+        
+        Route::resource('roles', RoleController::class);
 
-        Route::get('/', [AdminDashboard::class, 'index'])->name('index');
+         Route::get('/tahun-akademik', function () {
+            return view('admin.tahun_akademik.index');
+        })->name('tahun_akademik.index');
+
+          // Route Pengaturan Umum
+        Route::get('/settings/general', [App\Http\Controllers\Admin\SettingController::class, 'index'])
+            ->name('settings.general');
+
+        Route::post('/settings/general', [App\Http\Controllers\Admin\SettingController::class, 'update'])
+            ->name('settings.update');
+
+        // 1. DASHBOARD & REDIRECT
         Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
-
-        // Admin Profile
-        Route::get('/profil',        [ProfilController::class, 'show'])->name('profil.show');
-        Route::get('/profil/edit',   [ProfilController::class, 'edit'])->name('profil.edit');
-        Route::post('/profil/update',[ProfilController::class, 'update'])->name('profil.update');
-
+        Route::get('/', fn() => redirect()->route('admin.dashboard'));
+        
+        // 2. SEARCH
         Route::get('/search', [SearchController::class, 'index'])->name('search');
 
-        Route::resource('profilsekolah', ProfilSekolahController::class);
+        // 3. PROFIL ADMIN (Akun yang sedang login)
+        // MENGGUNAKAN ProfileAdminController.php
+        Route::controller(ProfileAdminController::class)->prefix('profil')->group(function () {
+            Route::get('/', 'show')->name('profil.show');      
+            Route::get('/edit', 'edit')->name('profil.edit');  
+            Route::post('/update', 'update')->name('profil.update');
+            // Catatan: Jika Anda ingin menggunakan ProfileAdminController untuk View 'profile_admin', 
+            // pastikan nama View di Controller-nya sudah benar: view('admin.profile_admin.index')
+        });
 
+        // 4. RESOURCE ROUTES LENGKAP
+        // SEMUA DIDEFINISIKAN SEBAGAI RESOURCE UNTUK KEMUDAHAN
         Route::resources([
-            'berita'           => BeritaController::class,
-            'galeri'           => GaleriController::class,
-            'prestasi'         => PrestasiController::class,
-            'ekstrakurikuler'  => EkstrakurikulerController::class,
-            'galerieskul'      => GaleriEskulController::class,
-            'forum'            => ForumController::class,
-            'guru'             => GuruController::class,
-            'jadwal'           => JadwalController::class,
-            'kelas'            => KelasController::class,
-            'kontak'           => KontakController::class,
-            'landinghero'      => LandingHeroController::class,
-            'laporan'          => LaporanController::class,
-            'mapel'            => MapelController::class,
-            'materi'           => MateriController::class,
-            'nilai'            => NilaiController::class,
-            'ortu'             => OrtuController::class,
-            'pengumuman'       => PengumumanController::class,
-            'pesan'            => PesanController::class,
-            'settings'         => SettingController::class,
-            'siswa'            => SiswaController::class,
-            'soal'             => SoalController::class,
-            'statistik'        => StatistikController::class,
-            'testimoni'        => TestimoniController::class,
-            'tugas'            => TugasController::class,
-            'users'            => UserController::class,
+            'absensi'           => AbsensiController::class,        // DITEMUKAN: absensi
+            'berita'            => BeritaController::class,         // DITEMUKAN: berita
+            'ekstrakurikuler'   => EkstrakurikulerController::class, // DITEMUKAN: ekstrakurikuler
+            'fasilitas'         => FasilitasController::class,      // DITEMUKAN: fasilitas
+            'forum'             => ForumController::class,          // DITEMUKAN: forum
+            'galeri'            => GaleriController::class,         // DITEMUKAN: galeri
+            'guru'              => GuruController::class,           // DITEMUKAN: guru
+            'jadwal'            => JadwalController::class,         // DITEMUKAN: jadwal
+            'kelas'             => KelasController::class,          // DITEMUKAN: kelas
+            'kontak'            => KontakController::class,         // DITEMUKAN: kontak
+            // 'landinghero' tidak dimasukkan ke resource
+            'laporan'           => LaporanController::class,        // DITEMUKAN: laporan
+            'mapel'             => MapelController::class,          // DITEMUKAN: mapel
+            'materi'            => MateriController::class,         // DITEMUKAN: materi
+            'nilai'             => NilaiController::class,          // DITEMUKAN: nilai
+            'ortu'              => OrtuController::class,           // DITEMUKAN: ortu
+            'pengumuman'        => PengumumanController::class,     // DITEMUKAN: pengumuman
+            'pesan'             => PesanController::class,          // DITEMUKAN: pesan
+            'prestasi'          => PrestasiController::class,       // DITEMUKAN: prestasi
+            'profilsekolah'     => ProfilSekolahController::class,  // DITEMUKAN: profil_sekolah
+            'program'           => ProgramController::class,        // DITEMUKAN: programs (View) & ProgramController
+            'settings'          => SettingController::class,        // DITEMUKAN: settings
+            'siswa'             => SiswaController::class,          // DITEMUKAN: siswa
+            'soal'              => SoalController::class,           // DITEMUKAN: soal
+            'testimoni'         => TestimoniController::class,      // DITEMUKAN: testimoni
+            'tugas'             => TugasController::class,          // DITEMUKAN: tugas
+            'users'             => UserController::class,           // DITEMUKAN: users
+
+            // Catatan Tambahan:
+            // - GaleriEskulController tidak ada di daftar Controllers, tetapi view-nya ada.
+            // - StatistikController ada di Controller, tetapi folder view-nya tidak terlihat.
+            // Asumsikan StatistikController digunakan untuk Laporan atau Dashboard, jadi tidak perlu resource.
+            // - LandingHeroController tidak dipakai sebagai resource, jadi tidak ada di sini.
         ]);
+        
+        // 5. PENDAFTARAN SISWA BARU (PPDB - Custom Route) - TIDAK SEBAGAI RESOURCE
+        Route::controller(PendaftaranController::class)->prefix('pendaftaran')->name('pendaftaran.')->group(function () {
+             Route::get('/', 'index')->name('index'); // admin.pendaftaran.index
+             Route::get('/{pendaftaran}', 'show')->name('show');
+             Route::put('/{pendaftaran}/status', 'updateStatus')->name('updateStatus');
+             Route::delete('/{pendaftaran}', 'destroy')->name('destroy');
+        });
+
+        // 6. PENGATURAN LANDING PAGE (Custom Route) - MENGGANTIKAN LANDING HERO
+        // MENGGUNAKAN LandingSettingController
+        Route::controller(LandingSettingController::class)->prefix('landing')->name('landing.')->group(function () {
+             Route::get('/hero', 'editHero')->name('hero'); // admin.landing.hero
+             Route::put('/hero', 'updateHero')->name('update.hero');
+             Route::get('/program', 'editProgram')->name('program'); 
+             // Catatan: Jika Anda membagi Program ke Resource dan Setting, pastikan ProgramController dan LandingSettingController tidak tumpang tindih.
+        });
+
+        // 7. ROUTE KHUSUS (Jika dibutuhkan, misalnya Statistik)
+        // StatistikController biasanya tidak full resource (CRUD)
+        Route::get('/statistik', [StatistikController::class, 'index'])->name('statistik.index');
+
+        // 8. LANDING HERO (Jika Anda masih ingin menggunakan LandingHeroController)
+        Route::controller(LandingHeroController::class)->prefix('hero')->name('hero.')->group(function () {
+            Route::get('/', 'edit')->name('edit'); // admin.hero.edit
+            Route::post('/', 'update')->name('update');
+        });
+        
     });
 
 /*
 |--------------------------------------------------------------------------
-| GURU AREA
+| GURU
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'role:guru'])
@@ -192,27 +260,22 @@ Route::middleware(['auth', 'role:guru'])
     ->as('guru.')
     ->group(function () {
 
-        Route::get('/', [GuruDashboard::class, 'index'])->name('index');
         Route::get('/dashboard', [GuruDashboard::class, 'index'])->name('dashboard');
 
-        Route::get('/notifikasi', [GuruNotifikasi::class, 'index'])->name('notifikasi');
-        Route::get('/profil', [GuruProfil::class, 'edit'])->name('profil.edit');
-        Route::put('/profil', [GuruProfil::class, 'update'])->name('profil.update');
-
         Route::resources([
-            'materi'      => GuruMateri::class,
-            'soal'        => GuruSoal::class,
-            'nilai'       => GuruNilai::class,
-            'tugas'       => GuruTugas::class,
-            'pengumuman'  => GuruPengumuman::class,
-            'absensi'     => GuruAbsensi::class,
-            'jadwal'      => GuruJadwal::class,
+            'materi' => GuruMateri::class,
+            'soal' => GuruSoal::class,
+            'nilai' => GuruNilai::class,
+            'tugas' => GuruTugas::class,
+            'pengumuman' => GuruPengumuman::class,
+            'absensi' => GuruAbsensi::class,
+            'jadwal' => GuruJadwal::class,
         ]);
     });
 
 /*
 |--------------------------------------------------------------------------
-| ORTU AREA
+| ORTU
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'role:ortu'])
@@ -232,51 +295,73 @@ Route::middleware(['auth', 'role:ortu'])
 
 /*
 |--------------------------------------------------------------------------
-| PUBLIC AREA
+| PUBLIC
 |--------------------------------------------------------------------------
 */
-Route::get('/', [PublicController::class, 'index'])->name('landing');
-Route::get('/profil', [ProfilPublikController::class, 'index'])->name('profil.publik.index');
-Route::get('/ekstrakurikuler', [EkstrakurikulerPublikController::class, 'index'])->name('ekstra.publik.index');
+
+// LANDING PAGE FINAL
+Route::get('/', [PublicController::class, 'index'])->name('public.landing');
+
+// PROFIL (TENTANG)
+Route::prefix('profil')->as('public.profil.')->group(function () {
+    Route::get('/', [ProfilPublikController::class, 'index'])->name('index');
+});
+
+// EKSTRAKURIKULER
+Route::prefix('ekstrakurikuler')->as('public.ekstrakurikuler.')->group(function () {
+    Route::get('/', [EkstrakurikulerPublikController::class, 'index'])->name('index');
+});
 
 // BERITA
-Route::prefix('berita')->as('berita.publik.')->group(function () {
+Route::prefix('berita')->as('public.berita.')->group(function () {
     Route::get('/', [BeritaPublikController::class, 'index'])->name('index');
     Route::get('/{slug}', [BeritaPublikController::class, 'show'])->name('show');
 });
 
 // GALERI
-Route::prefix('galeri')->as('galeri.publik.')->group(function () {
+Route::prefix('galeri')->as('public.galeri.')->group(function () {
     Route::get('/', [GaleriPublikController::class, 'index'])->name('index');
     Route::get('/{slug}', [GaleriPublikController::class, 'show'])->name('show');
 });
 
-// GURU PUBLIK
-Route::get('/guru', [GuruPublikController::class, 'index'])->name('guru.publik.index');
-Route::get('/guru/{id}', [GuruPublikController::class, 'show'])->name('guru.publik.show');
+// GURU
+Route::prefix('guru')->as('public.guru.')->group(function () {
+    Route::get('/', [GuruPublikController::class, 'index'])->name('index');
+    Route::get('/{id}', [GuruPublikController::class, 'show'])->name('show');
+});
 
-// PRESTASI PUBLIK
-Route::prefix('prestasi')->as('prestasi.publik.')->group(function () {
+// PRESTASI
+Route::prefix('prestasi')->as('public.prestasi.')->group(function () {
     Route::get('/', [PrestasiPublikController::class, 'index'])->name('index');
     Route::get('/{slug}', [PrestasiPublikController::class, 'show'])->name('show');
 });
 
-// PENGUMUMAN PUBLIK
-Route::get('/pengumuman', [PengumumanPublikController::class, 'index'])->name('pengumuman.publik.index');
+// PENGUMUMAN
+Route::prefix('pengumuman')->as('public.pengumuman.')->group(function () {
+    Route::get('/', [PengumumanPublikController::class, 'index'])->name('index');
+});
 
-// KONTAK PUBLIK
-Route::get('/kontak', [KontakPublikController::class, 'index'])->name('kontak.publik.index');
-Route::post('/kontak', [KontakPublikController::class, 'send'])->name('kontak.publik.send');
+// KONTAK
+Route::prefix('kontak')->as('public.kontak.')->group(function () {
+    Route::get('/', [KontakPublikController::class, 'index'])->name('index');
+    Route::post('/', [KontakPublikController::class, 'send'])->name('send');
+});
 
-// PENDAFTARAN PUBLIK
-Route::get('/pendaftaran', [PendaftaranController::class, 'index'])->name('pendaftaran');
-Route::post('/pendaftaran', [PendaftaranController::class, 'store'])->name('pendaftaran.store');
+// PENDAFTARAN (Route Asli)
+Route::prefix('pendaftaran')->as('public.pendaftaran.')->group(function () {
+    Route::get('/', [PendaftaranController::class, 'index'])->name('index');
+    Route::post('/', [PendaftaranController::class, 'store'])->name('store');
+});
 
-Route::get('/tentang', [PublicController::class, 'tentang'])->name('tentang');
+// ALIAS PENDAFTARAN (Solusi untuk route('pendaftaran')) <-- PERUBAHAN DI SINI
+Route::get('pendaftaran', [PendaftaranController::class, 'index'])->name('pendaftaran');
+
+// TENTANG
+Route::get('/tentang', [ProfilPublikController::class, 'index'])->name('public.tentang');
 
 /*
 |--------------------------------------------------------------------------
 | FALLBACK
 |--------------------------------------------------------------------------
 */
-Route::fallback(fn() => redirect()->route('landing'));
+Route::fallback(fn() => redirect()->route('public.landing'));

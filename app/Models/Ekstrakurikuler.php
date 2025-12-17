@@ -18,13 +18,18 @@ class Ekstrakurikuler extends Model
         'aktif',
     ];
 
-    // Biar route model binding pakai slug
+    // route model binding pakai slug
     public function getRouteKeyName()
     {
         return 'slug';
     }
 
-    // Auto-generate slug saat create
+    // relasi ke galeri eskul
+    public function galeriEskul()
+    {
+        return $this->hasMany(GaleriEskul::class, 'ekstrakurikuler_id');
+    }
+
     protected static function boot()
     {
         parent::boot();

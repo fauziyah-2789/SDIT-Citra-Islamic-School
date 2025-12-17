@@ -17,27 +17,16 @@ class Siswa extends Model
         'no_telp',
     ];
 
-    /**
-     * Relasi ke tabel kelas
-     * Setiap siswa berada di satu kelas
-     */
     public function kelas()
     {
         return $this->belongsTo(Kelas::class, 'kelas_id');
     }
 
-    /**
-     * Relasi ke orang tua
-     * Setiap siswa memiliki satu orang tua (jika 1 ortu per anak)
-     */
-    public function orangTua()
+    public function ortus()
     {
-        return $this->hasOne(Ortu::class, 'siswa_id');
+        return $this->hasMany(Ortu::class, 'siswa_id'); // satu siswa bisa punya banyak ortu
     }
 
-    /**
-     * Relasi opsional jika nanti ditambah tabel nilai
-     */
     public function nilai()
     {
         return $this->hasMany(Nilai::class);

@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Http\Controllers\Ortu;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class PengumumanController extends Controller
+{
+    /**
+     * Menampilkan daftar semua pengumuman yang relevan untuk orang tua.
+     */
+    public function index()
+    {
+        // Logika untuk mengambil data pengumuman yang relevan (misalnya pengumuman umum dan pengumuman kelas anak)
+        
+        $pengumuman = collect([
+            (object)['id' => 1, 'judul' => 'Libur Semester Ganjil', 'tanggal' => '2025-12-23', 'isi' => 'Libur akan dimulai dari tanggal 23 Desember 2025.'],
+            (object)['id' => 2, 'judul' => 'Rapat Komite Sekolah', 'tanggal' => '2025-12-20', 'isi' => 'Rapat akan diadakan di Aula Utama.'],
+            (object)['id' => 3, 'judul' => 'Perubahan Jadwal Tryout Kelas 9', 'tanggal' => '2025-12-16', 'isi' => 'Khusus kelas 9 terdapat perubahan jadwal.'],
+        ]); // Placeholder data
+
+        return view('ortu.pengumuman.index', compact('pengumuman'));
+    }
+
+    // Metode 'show' untuk detail pengumuman dapat ditambahkan di sini.
+}

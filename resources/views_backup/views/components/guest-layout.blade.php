@@ -1,0 +1,4 @@
+@props(['title' => null])
+<div>
+    {{ \ }}
+</div>

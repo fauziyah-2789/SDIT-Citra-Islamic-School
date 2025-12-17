@@ -6,6 +6,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+// IMPORT MODEL
+use App\Models\Role;
+use App\Models\Guru;
+use App\Models\Ortu;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -23,37 +28,45 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    // Relasi ke Role
+    protected $casts = [
+        'password' => 'hashed',
+    ];
+
+    // =====================
+    // RELATIONS
+    // =====================
+
     public function role()
     {
-        return $this->belongsTo(Role::class); // pastikan Role model ada
+        return $this->belongsTo(Role::class);
     }
 
-    // Relasi ke Guru
     public function guru()
     {
         return $this->hasOne(Guru::class, 'user_id');
     }
 
-    // Relasi ke Orang Tua
     public function orangTua()
     {
         return $this->hasOne(Ortu::class, 'user_id');
     }
 
-    // Helper cek role
+    // =====================
+    // ROLE HELPERS (AMAN)
+    // =====================
+
     public function isAdmin()
     {
-        return $this->role->name === 'admin';
+        return $this->role?->name === 'admin';
     }
 
     public function isGuru()
     {
-        return $this->role->name === 'guru';
+        return $this->role?->name === 'guru';
     }
 
     public function isOrtu()
     {
-        return $this->role->name === 'ortu';
+        return $this->role?->name === 'ortu';
     }
 }

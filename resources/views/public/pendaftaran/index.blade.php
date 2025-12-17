@@ -1,114 +1,79 @@
-<x-layouts.guest><section class="bg-gradient-to-br from-yellow-50 to-yellow-100 min-h-screen py-12">
-    <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl p-8">
-        <h2 class="text-3xl font-bold text-center text-yellow-700 mb-6">
-            Formulir Pendaftaran Siswa Baru SD
-        </h2>
-        <p class="text-center text-gray-600 mb-8">
-            Silakan isi data calon siswa dengan lengkap dan benar.
-        </p>
+@extends('components.layouts.guest')
 
-        {{-- Pesan sukses atau error --}}
-        @if(session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
-                {{ session('success') }}
-            </div>
-        @endif
+@section('title', 'Formulir Pendaftaran Siswa Baru')
 
-        @if($errors->any())
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
-                <ul class="list-disc ml-6">
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+@section('content')
 
-        {{-- Formulir --}}
-        <form action="{{ route('pendaftaran.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
-            @csrf
+    {{-- Header Halaman --}}
+    <section class="bg-indigo-700 py-16 text-white">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h1 class="text-4xl font-extrabold mb-2">Pendaftaran Siswa Baru Tahun Ajaran {{ date('Y') }}/{{ date('Y') + 1 }}</h1>
+            <p class="text-indigo-200 text-lg">Silakan isi data calon siswa dan data orang tua/wali dengan lengkap dan benar.</p>
+        </div>
+    </section>
 
-            <h3 class="text-lg font-semibold text-gray-800 border-b pb-1 mb-4">Data Calon Siswa</h3>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <label for="nama" class="block text-sm font-medium text-gray-700">Nama Lengkap Anak</label>
-                    <input type="text" name="nama" id="nama" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500" required>
+    {{-- FORMULIR UTAMA --}}
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white p-8 md:p-12 rounded-xl shadow-2xl border border-gray-100">
+
+                <div class="mb-8 text-center">
+                    <h2 class="text-2xl font-bold text-gray-800">Langkah 1: Data Calon Siswa</h2>
+                    <p class="text-gray-600">Mohon teliti dalam mengisi data berikut.</p>
                 </div>
 
-                <div>
-                    <label for="jenis_kelamin" class="block text-sm font-medium text-gray-700">Jenis Kelamin</label>
-                    <select name="jenis_kelamin" id="jenis_kelamin" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500" required>
-                        <option value="">-- Pilih Jenis Kelamin --</option>
-                        <option value="Laki-laki">Laki-laki</option>
-                        <option value="Perempuan">Perempuan</option>
-                    </select>
-                </div>
+                <form method="POST" action="{{ route('public.pendaftaran.store') }}">
+                    @csrf
 
-                <div>
-                    <label for="tempat_lahir" class="block text-sm font-medium text-gray-700">Tempat Lahir</label>
-                    <input type="text" name="tempat_lahir" id="tempat_lahir" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500" required>
-                </div>
+                    {{-- PESAN SUKSES/ERROR (JIKA ADA) --}}
+                    @if (session('success'))
+                        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
+                            <p class="font-bold">Pendaftaran Berhasil!</p>
+                            <p>{{ session('success') }}</p>
+                        </div>
+                    @endif
 
-                <div>
-                    <label for="tanggal_lahir" class="block text-sm font-medium text-gray-700">Tanggal Lahir</label>
-                    <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500" required>
-                </div>
-
-                <div class="md:col-span-2">
-                    <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat Lengkap</label>
-                    <textarea name="alamat" id="alamat" rows="3" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500" required></textarea>
-                </div>
-
-                <div>
-                    <label for="asal_tk" class="block text-sm font-medium text-gray-700">Asal TK (jika ada)</label>
-                    <input type="text" name="asal_tk" id="asal_tk" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500">
-                </div>
-            </div>
-
-            <h3 class="text-lg font-semibold text-gray-800 border-b pb-1 mt-8 mb-4">Data Orang Tua / Wali</h3>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <label for="nama_ayah" class="block text-sm font-medium text-gray-700">Nama Ayah</label>
-                    <input type="text" name="nama_ayah" id="nama_ayah" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500">
-                </div>
-
-                <div>
-                    <label for="nama_ibu" class="block text-sm font-medium text-gray-700">Nama Ibu</label>
-                    <input type="text" name="nama_ibu" id="nama_ibu" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500">
-                </div>
-
-                <div>
-                    <label for="no_telp_ortu" class="block text-sm font-medium text-gray-700">Nomor Telepon Orang Tua</label>
-                    <input type="text" name="no_telp_ortu" id="no_telp_ortu" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500" required>
-                </div>
-
-                <div>
-                    <label for="pekerjaan_ortu" class="block text-sm font-medium text-gray-700">Pekerjaan Orang Tua</label>
-                    <input type="text" name="pekerjaan_ortu" id="pekerjaan_ortu" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500">
-                </div>
-            </div>
-
-            <h3 class="text-lg font-semibold text-gray-800 border-b pb-1 mt-8 mb-4">Upload Dokumen</h3>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <label for="akta" class="block text-sm font-medium text-gray-700">Upload Akta Kelahiran (PDF/JPG)</label>
-                    <input type="file" name="akta" id="akta" accept=".pdf,.jpg,.jpeg,.png" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500">
-                </div>
-
-                <div>
-                    <label for="kk" class="block text-sm font-medium text-gray-700">Upload Kartu Keluarga (PDF/JPG)</label>
-                    <input type="file" name="kk" id="kk" accept=".pdf,.jpg,.jpeg,.png" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-yellow-500 focus:border-yellow-500">
-                </div>
-            </div>
-
-            <div class="text-center mt-8">
-                <button type="submit" class="bg-yellow-600 text-white px-6 py-3 rounded-lg hover:bg-yellow-700 transition">
-                    Kirim Pendaftaran
-                </button>
-            </div>
-        </form>
-    </div>
-</section></x-layouts.guest>
+                    @if ($errors->any())
+                        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">
+                            <p class="font-bold">Ada Kesalahan Input:</p>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
 
+                    {{-- GROUP 1: DATA SISWA --}}
+                    <div class="space-y-6 mb-10 p-6 border rounded-lg bg-indigo-50/50">
+                        <h3 class="text-xl font-semibold text-indigo-700 mb-4">Informasi Pribadi Calon Siswa</h3>
 
+                        {{-- Nama Lengkap --}}
+                        <div>
+                            <label for="nama_lengkap" class="block text-sm font-medium text-gray-700">Nama Lengkap Calon Siswa <span class="text-red-500">*</span></label>
+                            <input type="text" name="nama_lengkap" id="nama_lengkap" value="{{ old('nama_lengkap') }}" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2.5">
+                            @error('nama_lengkap')<p class="text-sm text-red-500 mt-1">{{ $message }}</p>@enderror
+                        </div>
+
+                        {{-- NISN (Jika ada) --}}
+                        <div>
+                            <label for="nisn" class="block text-sm font-medium text-gray-700">NISN (Jika Ada)</label>
+                            <input type="text" name="nisn" id="nisn" value="{{ old('nisn') }}"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2.5">
+                            @error('nisn')<p class="text-sm text-red-500 mt-1">{{ $message }}</p>@enderror
+                        </div>
+                        
+                        {{-- Tempat & Tanggal Lahir --}}
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="tempat_lahir" class="block text-sm font-medium text-gray-700">Tempat Lahir <span class="text-red-500">*</span></label>
+                                <input type="text" name="tempat_lahir" id="tempat_lahir" value="{{ old('tempat_lahir') }}" required
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2.5">
+                                @error('tempat_lahir')<p class="text-sm text-red-500 mt-1">{{ $message }}</p>@enderror
+                            </div>
+                            <div>
+                                <label for="tanggal_lahir" class="block text-sm font-medium text-gray-700">Tanggal Lahir <span class="text-red-500">*</span></label>
+                                <input type="date" name="tanggal_lahir" id="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required
+                                    class="mt-

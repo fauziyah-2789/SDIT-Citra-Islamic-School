@@ -16,12 +16,13 @@ class LoginRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // Semua user bisa mencoba login
         return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
@@ -40,19 +41,14 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt(
-            $this->only('email', 'password'),
-            $this->boolean('remember')
-        )) {
-            // Jika login gagal, catat rate limiter
+        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'), // pesan default Laravel
+                'email' => trans('auth.failed'),
             ]);
         }
 
-        // Jika berhasil, reset rate limiter
         RateLimiter::clear($this->throttleKey());
     }
 
@@ -84,7 +80,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        // key unik per email + IP
-        return Str::transliterate(Str::lower($this->input('email')) . '|' . $this->ip());
+        return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
     }
 }

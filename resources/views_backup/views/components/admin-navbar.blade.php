@@ -1,0 +1,23 @@
+<nav class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="{{ route('admin.dashboard') }}" class="text-lg font-semibold text-blue-600">
+            Admin Panel
+        </a>
+
+        <ul class="flex items-center space-x-6">
+            <li><a href="{{ route('admin.dashboard') }}" class="hover:text-blue-600">Dashboard</a></li>
+            <li><a href="{{ route('admin.berita.index') }}" class="hover:text-blue-600">Berita</a></li>
+            <li><a href="{{ route('admin.galeri.index') }}" class="hover:text-blue-600">Galeri</a></li>
+            <li><a href="{{ route('admin.guru.index') }}" class="hover:text-blue-600">Guru</a></li>
+            <li><a href="{{ route('admin.ortu.index') }}" class="hover:text-blue-600">Orang Tua</a></li>
+            <li>
+                <form action="{{ route('logout') }}" method="POST" class="inline">
+                    @csrf
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                        Logout
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
